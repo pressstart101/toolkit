@@ -28,7 +28,7 @@ class PingListener():
     def stop_listening(self):
 
         self.process.kill()
-        print(self.process.wait())
+        # print(self.process.wait())
 
     def get_pings(self, max_number_of_pings=10):
         
@@ -37,11 +37,9 @@ class PingListener():
             new_line_index = self.buffer.find(b'\n')
             if new_line_index != -1:
                 raw_ping = self.buffer[:new_line_index]
-                print("\nbefore slice")
-                print(self.buffer)
+
                 self.buffer = self.buffer[new_line_index+1:]
-                print("\nafter slice")
-                print(self.buffer)
+
                 grep_time = "(?P<time>\\d\\d:\\d\\d:\\d\\d)"
                 grep_ip = '(?P<source_ip>\\b([0-9]{1,3}\.){3}[0-9]{1,3}\\b)'
                 grep_seq = "seq (?P<seq>\\d+)"
@@ -52,12 +50,12 @@ class PingListener():
                     self.parsed_pings.append(grep.groupdict())
             else:    
                 try:
-                    # data = read(self.process.stdout.fileno(), 1024)
-                    data = self.process.stdout.read(1024)
-                    if data:
-                        self.buffer.extend(data)
-                        with open('log.txt', 'a') as file:
-                            file.write(data.decode('ascii'))
+                    self.buffer.extend(read(self.process.stdout.fileno(), 1024))
+                    # data = self.process.stdout.read(1024)
+                    # if data:
+                    #     self.buffer.extend(data)
+                    #     with open('log.txt', 'a') as file:
+                    #         file.write(data.decode('ascii'))
 
 
 
