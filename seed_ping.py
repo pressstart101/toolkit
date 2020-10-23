@@ -37,25 +37,50 @@ class PingListener():
             new_line_index = self.buffer.find(b'\n')
             if new_line_index != -1:
                 raw_ping = self.buffer[:new_line_index]
+                print("\nbefore slice")
+                print(self.buffer)
                 self.buffer = self.buffer[new_line_index+1:]
-                grep = re.match("(?P<time>\\d\\d:\\d\\d:\\d\\d).*?(?P<source_ip>\\b([0-9]{1,3}\.){3}[0-9]{1,3}\\b).*", raw_ping.decode('ascii'))
+                print("\nafter slice")
+                print(self.buffer)
+                grep_time = "(?P<time>\\d\\d:\\d\\d:\\d\\d)"
+                grep_ip = '(?P<source_ip>\\b([0-9]{1,3}\.){3}[0-9]{1,3}\\b)'
+                grep_seq = "seq (?P<seq>\\d+)"
+                grep = re.match(f'{grep_time}.*?{grep_ip}.*?{grep_seq}', raw_ping.decode('ascii'))
+                
+
                 if grep:
                     self.parsed_pings.append(grep.groupdict())
             else:    
                 try:
-                    self.buffer.extend(read(self.process.stdout.fileno(), 1024))
+                    # data = read(self.process.stdout.fileno(), 1024)
+                    data = self.process.stdout.read(1024)
+                    if data:
+                        self.buffer.extend(data)
+                        with open('log.txt', 'a') as file:
+                            file.write(data.decode('ascii'))
+
+
 
                 except(BlockingIOError):
-                    print(self.parsed_pings)
-                    print("error happened") 
+                    # print(self.parsed_pings)
+                    print("buffer is empty") 
                     break
         # output = self.parsed_pings[:max_number_of_pings]     
         # del self.parsed_pings[:max_number_of_pings]  
         num_of_pings = min(len(self.parsed_pings), max_number_of_pings)
-        try:
-            output_in_popen = [self.parsed_pings.pop(0) for _ in range(num_of_pings)]
-        except:
-            print("hi")
+        # print("before pop")
+        # print(self.parsed_pings)
+        output_in_popen = [self.parsed_pings.pop(0) for _ in range(num_of_pings)]
+        # print("after pop")
+        # print(self.parsed_pings)
+
+
+        # try:
+        #     output_in_popen = [self.parsed_pings.pop(0) for _ in range(num_of_pings)]
+        # except:
+        #     print("hi")
+
+
         # json_dumps = json.dumps(output_in_popen)
         # print(type(json_dumps))
         # json_output = json.dumps(output_in_popen.communicate())
@@ -83,10 +108,10 @@ def kickoff_tcpdump():
 
     process = subprocess.Popen(["tcpdump", "-l", "-nni", "lo", "-e", "icmp[icmptype]==8"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     flags = fcntl(process.stdout, F_GETFL) # get current p.stdout flags
-    print(flags)
+    # print(flags)
     fcntl(process.stdout, F_SETFL, flags | O_NONBLOCK)
     flags = fcntl(process.stdout, F_GETFL)
-    print(flags)
+    # print(flags)
     # for line in iter(process.stdout.readline,''):
     #     grep = re.match("(?P<time>\\d\\d:\\d\\d:\\d\\d).*?(?P<source_ip>\\b([0-9]{1,3}\.){3}[0-9]{1,3}\\b).*", line.decode('ascii'))
     #     if grep:
@@ -109,11 +134,11 @@ def test_ping():
     # ping.get_pings()
     # time.sleep(5)
     # ping.get_pings()
-    time.sleep(5)
+    time.sleep(3)
     p = ping.get_pings()
-    print('before')
-    print(p)
-    print('after')
+    # print('before')
+    # print(p)
+    # print('after')
     return p
 
 

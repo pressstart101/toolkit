@@ -3,6 +3,7 @@ from seed_ping import kickoff_tcpdump, test_ping
 import crud
 
 
+
 app = Flask(__name__)
 
 
@@ -17,8 +18,8 @@ def homepage():
 def ping():
     ping = test_ping()
     # ping = kickoff_tcpdump()
-    print(ping)
-    print(type(ping))
+    # print(ping)
+    # print(type(ping))
     return jsonify(ping)
 
 

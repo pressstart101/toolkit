@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Movie Ratings Home{% endblock %}
+
+{% block body %}
+  <title>Dashboard</title>
+
+
+
+    <h1>Dashboard</h1>
+
+    
+    <input type="text" id="input1" />
+    <button onclick="myJsFunction()"></button>
+    <script type="text/javascript">
+     function myJsFunction(){
+        var text=document.getElementById('input1').value;
+     }
+    </script>
+
+  <div id='ping'>
+    <table id="table" class="hidden">
+      <tr>
+          <th>time</th>
+          <th>ip</th>
+      </tr>
+  </table>
+  </div>
+  <div id='root'>
+    
+  </div>
+  {% endblock %}
