@@ -21,15 +21,33 @@ window.setInterval(function(){
                     }
                 }
                 if(txt != ""){
-                    
-                    $("#table").html(txt); 
+                    arr.push(cur_val)
+                    let latest = arr.slice(Math.max(arr.length - 5, 0));
+                    // let str = [];
+                    // for(key in latest) {
+                    //     if (latest.hasOwnProperty(key)) {
+                    //       str.push("Key is " + key + ", value is " + latest[key] + "\n");
+                    //     }
+                    //   }
+                    txt = ""
+                    for(let i=0;i<latest.length;i++){
+                        txt += `<tr><td>${latest[i].time}</td><td>${latest[i].ip}</td></tr>`
+                        // $("#table_body").append(`<tr><td>${latest[i].time}</td><td>${latest[i].ip}</td></tr>`);
+                    }
+                    $("#table_body").html(txt);
+                      
+                    // console.log(JSON.stringify(latest));
+                    // let str = "<tr><th></th></tr>"
+                    // $("#table_body").html(JSON.stringify(latest)); 
                     //#use slice function
                     // $("#table").append(txt);
-                    arr.push(cur_val)
+                    
                     
                 }
             }
-            console.log(arr.slice(Math.max(arr.length - 5, 0)))
+            let latest = arr.slice(Math.max(arr.length - 5, 0))
+            // console.log(arr.slice(Math.max(arr.length - 5, 0)))
+            
         }
 
 

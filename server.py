@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, flash, session,redirect, jsonify
+from flask import send_from_directory
 from seed_ping import kickoff_tcpdump, test_ping
 import crud
+import os
 
 
 
@@ -23,7 +25,10 @@ def ping():
     return jsonify(ping)
 
 
-
+# @app.route('/favicon.ico')
+# def favicon():
+#     return send_from_directory(os.path.join(app.root_path, 'static/img'),
+#                           'favicon.ico')
 
 
 
