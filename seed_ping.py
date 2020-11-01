@@ -8,7 +8,8 @@ import asyncio
 from fcntl import fcntl, F_GETFL, F_SETFL
 from os import O_NONBLOCK, read
 import json
-import time
+
+
 
 
 
@@ -127,13 +128,13 @@ def kickoff_tcpdump():
 
 
 def test_ping():
-    ping = PingListener()
-    ping.start_listening()
+    # ping = PingListener()
+    server.ping_init.start_listening()
     # ping.get_pings()
     # time.sleep(5)
     # ping.get_pings()
     time.sleep(3)
-    p = ping.get_pings()
+    p = server.ping_init.get_pings()
     # print('before')
     # print(p)
     # print('after')

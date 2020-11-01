@@ -9,31 +9,39 @@
     <h1>Dashboard</h1>
 
     
-    <input type="text" id="input1" />
-    <button onclick="myJsFunction()"></button>
-    <script type="text/javascript">
-     function myJsFunction(){
-        var text=document.getElementById('input1').value;
-     }
-    </script>
 
-  <div id='ping'>
-    <table id="table" class="hidden">
+      <form action="/api/xss.json">
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url"><br><br>
+        <input type="submit" value="Submit">
+      </form>
+
+
+
+
+
+
+    <!-- <div>
+      <input type="text" id="input1" />
+      <button onclick="myJsFunction()"></button>
+      <script type="text/javascript">
+      function myJsFunction(){
+          var text=document.getElementById('input1').value;
+      }
+      </script>
+    </div> -->
+
+
+
+  <div class="w-25 panel panel-default justify-content-center"" id='ping'>
+    <table id="table table-curved" class="table table-dark">
       <thead>
       <tr>
-          <th>time</th>
-          <th>ip</th>
+          <th scope="col">Time</th>
+          <th scope="col">IP</th>
       </tr>
     </thead>
     <tbody id="table_body">
-      <tr>
-        <td>1:23</td>
-        <td>1.2.3.4</td>
-      </tr>
-      <tr>
-        <td>3:23</td>
-        <td>8.2.3.4</td>
-      </tr>
     </tbody>
   </table>
   </div>
@@ -41,3 +49,6 @@
     
   </div>
   {% endblock %}
+
+
+  
