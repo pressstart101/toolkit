@@ -41,9 +41,17 @@ def ping():
 @app.route('/api/xss.json')
 def xss_test():
     xss = XSS()
-    url = "https://xss-game.appspot.com/level1/frame"
+    # url = "https://xss-game.appspot.com/level1/frame"
+    url = request.args["url"]
+    print("this is url \n\n\n")
+    print(url)
+    print("done\n\n\n")
+    xss = XSS()
+    result = xss.scan_xss(url)
     print(xss.scan_xss(url))
-    return jsonify(xss)
+    # print(xss.scan_xss(url))
+    # return jsonify(xss)
+    return jsonify(result)
 # @app.route('/favicon.ico')
 # def favicon():
 #     return send_from_directory(os.path.join(app.root_path, 'static/img'),
@@ -56,7 +64,7 @@ if __name__ == '__main__':
     global ping_init
     ping_init = PingListener()
     ping_init.start_listening()
-    # xss = XSS()
-    # url = "https://xss-game.appspot.com/level1/frame"
-    # print(xss.scan_xss(url))
+
+    
+    
     app.run(host='0.0.0.0', debug=True, threaded=True)   
