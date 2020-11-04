@@ -42,7 +42,7 @@ def ping():
 def xss_test():
     xss = XSS()
     # url = "https://xss-game.appspot.com/level1/frame"
-    url = request.args["url"]
+    url = request.args["url_form"]
     print("this is url \n\n\n")
     print(url)
     print("done\n\n\n")

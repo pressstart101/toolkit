@@ -59,8 +59,64 @@ window.setInterval(function(){
 }, 1000);
 
 
+// const formValues = $('#xss').serialize();
+// $.post("/api/xss.json", formValues, resultHandler);
+
+// $("#url_form").submit(function(e) {
+
+//     e.preventDefault(); // avoid to execute the actual submit of the form.
+
+//     var form = $(this);
+//     var url = form.attr('action');
+    
+//     $.ajax({
+//            type: "POST",
+//            url: '/api/xss.json',
+//            data: form.serialize(), // serializes the form's elements.
+//            success: function(data)
+//            {
+//                alert(data); // show response from the php script.
+//            }
+//          });
+
+    
+// });
 
 
+function displayResult(data) {
+    alert(data.exploit)
+};
+
+$('#url_form').on('submit', (evt) => {
+    evt.preventDefault();
+    let params = {'url_form': $('#url').val()};
+
+    $.get('/api/xss.json', params, displayResult);
+
+
+  });
+
+
+
+
+//   $('#xss').submit(function(e){
+//     e.preventDefault();
+//     $.ajax({
+//         url:'/api/xss.json',
+//         type:'post',
+//         data:$('#xss').serialize(),
+//         success:function(){
+//             //whatever you wanna do after the form is successfully submitted
+//             alert(data)
+//         }
+//     });
+// });
+
+//   $.get('/api/xss.json', (response) => {
+//     // Display response from the server
+//     $('#url_form').text(response.toString());
+//     // alert(`${response}`);
+//   });
 
 // $.get('/api/ping.json', (response) => {
 //     $('#ping').text(response.toString());
