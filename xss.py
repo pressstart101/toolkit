@@ -3,6 +3,7 @@ import requests
 # from pprint import pprint
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
+import codecs
 
 class XSS():
 
@@ -82,8 +83,13 @@ class XSS():
 
         forms = self.get_all_forms(url)
         # print(f"[+] Detected {len(forms)} forms on {url}.")
-        
-        js_script = "<Script>alert('hi')</scripT>"
+
+        # js_script = "<Script>alert('hi')</scripT>"
+        with codecs.open('payload.txt','r', encoding='utf-8', errors='ignore') as f:
+            js_script = [line.strip() for line in f]
+        # js_script_raw =  [line.strip() for line in f]
+        # js_script = unicode(js_script_raw)
+        print(js_script)
         # returning value
         is_vulnerable = False
         result = {"url": url,
@@ -93,23 +99,27 @@ class XSS():
         # iterate over all forms
         for form in forms:
             form_details = self.get_form_details(form)
-            content = self.submit_form(form_details, url, js_script).content.decode()
-            if js_script in content:
-                # print(f"[+] XSS Detected on {url}")
-                # print(f"[*] Form details:")
-                # pprint(form_details)
-                # print("\n\n\nform details\n\n\n")
-                # print(form_details['inputs'][0]['name'])
-                is_vulnerable = True
-                field_name = form_details['inputs'][0]['name']
-                exploit = form_details['inputs'][0]['value']
-                form_type = form_details['inputs'][0]['type']
-                method = form_details['method']
-                result['exploit'] = exploit
-                result['field_name'] = field_name
-                result['form_type'] = form_type
-                result['method'] = method
-                result['is_vulnerable'] = is_vulnerable
+            for payload in js_script:
+                content = self.submit_form(form_details, url, payload).content.decode()
+                if payload in content:
+                    # print(f"[+] XSS Detected on {url}")
+                    # print(f"[*] Form details:")
+                    # pprint(form_details)
+                    # print("\n\n\nform details\n\n\n")
+                    # print(form_details['inputs'][0]['name'])
+
+                    is_vulnerable = True
+                    field_name = form_details['inputs'][0]['name']
+                    exploit = form_details['inputs'][0]['value']
+                    form_type = form_details['inputs'][0]['type']
+                    method = form_details['method']
+
+                    result['exploit'] = exploit
+                    result['field_name'] = field_name
+                    result['form_type'] = form_type
+                    result['method'] = method
+                    result['is_vulnerable'] = is_vulnerable
+                    break
                  # won't break because we want to print available vulnerable forms
         return result
 
