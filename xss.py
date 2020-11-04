@@ -1,6 +1,6 @@
 
 import requests
-from pprint import pprint
+# from pprint import pprint
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
 
@@ -81,13 +81,13 @@ class XSS():
         # get all the forms from the URL
 
         forms = self.get_all_forms(url)
-        print(f"[+] Detected {len(forms)} forms on {url}.")
-        print("\n\n\nfrom scan_xss\n\n\n")
+        # print(f"[+] Detected {len(forms)} forms on {url}.")
+        
         js_script = "<Script>alert('hi')</scripT>"
         # returning value
         is_vulnerable = False
-        result = {"url": "",
-            "num_of_vulnerable_forms": 0,
+        result = {"url": url,
+            "num_of_vulnerable_forms": len(forms),
             "is_vulnerable": is_vulnerable,
             }
         # iterate over all forms
@@ -95,11 +95,22 @@ class XSS():
             form_details = self.get_form_details(form)
             content = self.submit_form(form_details, url, js_script).content.decode()
             if js_script in content:
-                print(f"[+] XSS Detected on {url}")
-                print(f"[*] Form details:")
-                pprint(form_details)
+                # print(f"[+] XSS Detected on {url}")
+                # print(f"[*] Form details:")
+                # pprint(form_details)
+                # print("\n\n\nform details\n\n\n")
+                # print(form_details['inputs'][0]['name'])
                 is_vulnerable = True
-                # won't break because we want to print available vulnerable forms
+                field_name = form_details['inputs'][0]['name']
+                exploit = form_details['inputs'][0]['value']
+                form_type = form_details['inputs'][0]['type']
+                method = form_details['method']
+                result['exploit'] = exploit
+                result['field_name'] = field_name
+                result['form_type'] = form_type
+                result['method'] = method
+                result['is_vulnerable'] = is_vulnerable
+                 # won't break because we want to print available vulnerable forms
         return result
 
 
@@ -112,3 +123,5 @@ class XSS():
 
 # jquery.get
 # or fetch
+
+
