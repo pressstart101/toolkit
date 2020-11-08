@@ -84,7 +84,104 @@ window.setInterval(function(){
 
 
 function displayResult(data) {
-    alert(data.exploit)
+    // alert(data.exploit)
+    // let txt = data.exploit
+    let txt = ''
+    // let len = Object.keys(data).length;
+    // for(let i=0;i<len;i++){
+
+
+        // for (let element in data) {
+        //     console.log(`${element}: ${data[element]}`)
+        //     txt = `${element}: ${data[element]}`;
+        //     $("#1").html("").append($("")).text(txt);
+        // }
+    if (!data.is_vulnerable) {
+        $('table').hide()
+        let not_vuln = document.createElement("h3");
+        not_vuln.innerHTML = "Not Vunrerable to XSS"
+        let xss = document.getElementById('xss')
+        xss.appendChild(not_vuln);
+        $('#xss')
+    } else {
+        $('table').show()
+        $("#is_vulnerable").text(data.is_vulnerable);
+        $("#vuln_url").text(data.url);
+        $("#exploit").text(data.exploit);
+        $("#vuln_field").text(data.field_name);
+        $("#vuln_form_type").text(data.form_type);
+        $("#method").text(data.method);
+
+    }
+    
+    // if (!data.is_vulnerable) {
+        // let row = document.createElement("tr");
+        // row.innerHTML = `<th>Vulnerable Field Name Tag</th><td id=\'field_name\'>${data.field_name}</td>`
+
+        // let table = document.getElementById("table")
+        // table.tBodies[0].appendChild(row);
+        // $('table').hide()
+
+
+
+        // row.innerHTML = `<th>Successful Exploit </th><td id=\'field_name\'>${data.exploit}</td>`
+        // table.tBodies[0].appendChild(row);
+
+
+    // }
+
+
+    // data.num_of_vulnerable_forms
+    // data.is_vulrerable = True
+    // data.field_name
+    // data.form_type
+    // data.method
+
+
+
+        // txt += `${data[i]}`;
+        // $("#table_body").append(`<tr><td>${latest[i].time}</td><td>${latest[i].ip}</td></tr>`);
+        // console.log(txt)
+    // }
+    // $("#xss").html("").append($("")).text(txt);
+    // $("#1").html("").append($("")).text(txt);
+    // $("#2").html("").append($("")).text(txt);
+
+
+    // $.each(data, function(key, element) {
+    //     txt = `${key} ${element}`;
+    //     $('#xss')
+    //     .html("")
+    //     .append($("<td></td>").text(txt))
+
+    // $.each(data, function(key, element) {
+
+                
+    //     txt += `<tr><td>${key} ${element} `;
+    //     alert(txt);
+    //     $("#xss").html(txt);
+
+
+    // });
+
+    
+
+
+
+
+    // $("#xss").text(data.exploit).val();
+    // $("#xss").text(data.url).val();
+    // $("#xss").text($(data.exploit).val());
+
+    // data.url
+    // data.num_of_vulnerable_forms
+    // data.is_vulrerable = True
+    // data.field_name
+    // data.form_type
+    // data.method
+    
+
+
 };
 
 $('#url_form').on('submit', (evt) => {
@@ -92,7 +189,8 @@ $('#url_form').on('submit', (evt) => {
     let params = {'url_form': $('#url').val()};
 
     $.get('/api/xss.json', params, displayResult);
-
+    // let table = $('#table').DataTable();
+    // table.ajax.reload();
 
   });
 

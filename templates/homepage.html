@@ -10,8 +10,8 @@
 
     
 
-      <form id= "url_form">
-        <label for="url">URL:</label>
+      <form id="url_form">
+        <label form="url">URL:</label>
         <input type="text" id="url" name="url"><br><br>
         <input type="submit" value="Submit">
       </form>
@@ -33,11 +33,31 @@
       </script>
     </div> -->
 
-  <div id='xss'>
+    <!-- <div id='xss'> -->
 
+      
+  <div class="w-50 panel panel-default justify-content-center"" id='xss'>
+    <table id="table" class="table table-dark" style="display:none">
+      <tr><th>URL</th><td id="vuln_url">None</td></tr>
+      <tr><th>Is Vulnerable</th><td id="is_vulnerable">None</td></tr>
+      <tr><th>Successful Exploit</th><td id="exploit">None</td></tr>
+      <tr><th>Vulnerable Field Name Tag</th><td id="vuln_field">None</td></tr>
+      <tr><th>Vulnerable Form Type</th><td id="vuln_form_type">None</td></tr>
+      <tr><th>Method</th><td id="method">Get</td></tr>
+
+      <!-- <tr><th>filed name</th><td id="field_name">data</td></tr> -->
+
+  </table>
   </div>
+      
 
-  <div class="w-25 panel panel-default justify-content-center"" id='ping'>
+
+
+  
+
+  <!-- </div> -->
+
+  <div class="w-25 panel panel-default justify-content-center float-right"" id='ping'>
     <table id="table table-curved" class="table table-dark">
       <thead>
       <tr>
