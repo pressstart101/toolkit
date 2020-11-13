@@ -26,15 +26,24 @@ def ping():
     # ping.get_pings()
     # time.sleep(5)
     # ping.get_pings()
+
+    
+
     time.sleep(3)
     p = ping_init.get_pings()
+
+
+
     # print('before')
     # print(p)
     # print('after')
     # ping = kickoff_tcpdump()
     # print(ping)
     # print(type(ping))
+
+    # no_pings = {"pings": None}
     return jsonify(p)
+    # return jsonify(no_pings)
 
 
 
@@ -45,9 +54,12 @@ def xss_test():
     url = request.args["url_form"]
     print("this is url \n\n\n")
     print(url)
+
     print("done\n\n\n")
     xss = XSS()
     result = xss.scan_xss(url)
+    print("result\n\n\n")
+    print(result)
     print(xss.scan_xss(url))
     # print(xss.scan_xss(url))
     # return jsonify(xss)

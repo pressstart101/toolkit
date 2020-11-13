@@ -86,7 +86,13 @@ window.setInterval(function(){
 function displayResult(data) {
     // alert(data.exploit)
     // let txt = data.exploit
+    $('#pageloader').hide()
+
     let txt = ''
+    console.log('\n\n\n DATA from displayresult')
+    console.log(data)
+    console.log(data.is_vulnerable == false)
+    
     // let len = Object.keys(data).length;
     // for(let i=0;i<len;i++){
 
@@ -96,15 +102,17 @@ function displayResult(data) {
         //     txt = `${element}: ${data[element]}`;
         //     $("#1").html("").append($("")).text(txt);
         // }
-    if (!data.is_vulnerable) {
-        $('table').hide()
+        console.log(`DATA BEFORE IF STATEMENT ${data} \n\n`)
+    if (data.is_vulnerable === false) {
+        console.log("NOT VULNERABLE from conditional \n\n")
+        $('#table').hide()
         let not_vuln = document.createElement("h3");
         not_vuln.innerHTML = "Not Vunrerable to XSS"
         let xss = document.getElementById('xss')
         xss.appendChild(not_vuln);
         $('#xss')
     } else {
-        $('table').show()
+        $('#table').show()
         $("#is_vulnerable").text(data.is_vulnerable);
         $("#vuln_url").text(data.url);
         $("#exploit").text(data.exploit);
@@ -184,15 +192,28 @@ function displayResult(data) {
 
 };
 
+
+
 $('#url_form').on('submit', (evt) => {
     evt.preventDefault();
+    $('#table').hide()
     let params = {'url_form': $('#url').val()};
 
     $.get('/api/xss.json', params, displayResult);
+    $('#pageloader').show();
+
     // let table = $('#table').DataTable();
     // table.ajax.reload();
 
   });
+
+
+
+$(document).ready(function(){
+    $("#url_form").on("submit", function(){
+     $("#pageloader").fadeIn();
+    });//submit
+});//document ready
 
 
 

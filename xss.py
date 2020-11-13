@@ -82,6 +82,7 @@ class XSS():
         # get all the forms from the URL
 
         forms = self.get_all_forms(url)
+        print(f'FORMS \n\n{forms}\n\n')
         # print(f"[+] Detected {len(forms)} forms on {url}.")
 
         # js_script = "<Script>alert('hi')</scripT>"
@@ -89,12 +90,16 @@ class XSS():
             js_script = [line.strip() for line in f]
         # js_script_raw =  [line.strip() for line in f]
         # js_script = unicode(js_script_raw)
-        print(js_script)
+        # print(js_script)
         # returning value
         is_vulnerable = False
         result = {"url": url,
             "num_of_vulnerable_forms": len(forms),
             "is_vulnerable": is_vulnerable,
+            "exploit": None,
+            "field_name": None,
+            "form_type": None,
+            "method": None
             }
         # iterate over all forms
         for form in forms:
@@ -121,6 +126,7 @@ class XSS():
                     result['is_vulnerable'] = is_vulnerable
                     break
                  # won't break because we want to print available vulnerable forms
+        print(f'RESULT from \n\n\{result}\n\n')
         return result
 
 
