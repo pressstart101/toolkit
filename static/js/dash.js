@@ -105,12 +105,13 @@ function displayResult(data) {
         console.log(`DATA BEFORE IF STATEMENT ${data} \n\n`)
     if (data.is_vulnerable === false) {
         console.log("NOT VULNERABLE from conditional \n\n")
-        $('#table').hide()
-        let not_vuln = document.createElement("h3");
-        not_vuln.innerHTML = "Not Vunrerable to XSS"
-        let xss = document.getElementById('xss')
-        xss.appendChild(not_vuln);
-        $('#xss')
+        // $('#table').hide()
+        $('#notvuln').show()
+        // let not_vuln = document.createElement("h3");
+        // not_vuln.innerHTML = "Not Vunrerable to XSS"
+        // let xss = document.getElementById('xss')
+        // xss.appendChild(not_vuln);
+        // $('#xss')
     } else {
         $('#table').show()
         $("#is_vulnerable").text(data.is_vulnerable);
@@ -197,6 +198,7 @@ function displayResult(data) {
 $('#url_form').on('submit', (evt) => {
     evt.preventDefault();
     $('#table').hide()
+    $('#notvuln').hide()
     let params = {'url_form': $('#url').val()};
 
     $.get('/api/xss.json', params, displayResult);
