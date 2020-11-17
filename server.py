@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session,redirect, jsonify, session
+from flask import Flask, render_template, request, flash, session,redirect, jsonify, session, get_flashed_messages
 from flask import send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -10,6 +10,7 @@ import time
 from xss import XSS
 import pdb 
 from config import SECRET_KEY
+import jinja2
 
 
 
@@ -20,6 +21,8 @@ app.config['SECRET_KEY'] = SECRET_KEY
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    print("\n\n flash messages")
+    print(get_flashed_messages())
     # pdb.set_trace()
     if request.method == 'POST':
         email = request.form.get('email')
@@ -42,7 +45,10 @@ def login():
     return render_template('/login.html')
 
 
-
+@app.route('/logout')
+def logout():
+    session.pop('logged_in_as', 'none')
+    return redirect('/login')
 
 
 
@@ -68,6 +74,11 @@ def login():
 def homepage():
     """View homepage."""
     session['user'] = "email"
+    if session.get('logged_in_as'):
+        user = crud.get_user_by_id(session['logged_in_as'])
+        flash(f'Welcome back, {user.email}')
+    else:
+        return redirect('/login')
     return render_template('homepage.html')
 
 # @app.route('/login')
@@ -126,6 +137,19 @@ def xss_test():
 #     return send_from_directory(os.path.join(app.root_path, 'static/img'),
 #                           'favicon.ico')
 
+
+@app.route('/users', methods=['POST']) 
+def register_user():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if crud.get_user_by_email(email) == None:
+        user = crud.create_user(email, password)
+        flash("Account Created Successfully")
+        return redirect('/')
+    else:
+        flash("User already exists")
+        return redirect("/")
+
 @app.route('/api/user/<int:user_id>')
 def get_user(user_id):
     """Return a user from the database as JSON."""
@@ -147,6 +171,9 @@ if __name__ == '__main__':
     ping_init = PingListener()
     ping_init.start_listening()
 
+
+
+   
 
     
     app.run(host='0.0.0.0', debug=True, threaded=True)   

@@ -10,18 +10,26 @@
                 <p id="profile-name" class="profile-name-card"></p>
                 <form  class="form-signin" action="/login" method="POST">
                     
-                
+                    
                     <input type="email" name="email" id="inputEmail" class="form-control form-group" placeholder="email" required autofocus>
                     <input type="password" name="password" id="inputPassword" class="form-control form-group" placeholder="password" required autofocus>
 
                     <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">enter</button>
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" formaction="/users">register</button>
+
                 </form><!-- /form -->
+                <ul>
+                    {% for message in get_flashed_messages() %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                  
             </div>
         </div>
     </div>
     </div>
 
-
+<!-- 
     <h2>Create an Account</h2>
     <form action="/users" method="POST">
       <p>
@@ -35,6 +43,8 @@
       <p>
         <input type="submit">
       </p>
-    </form>
+    </form> -->
+
+
 
   {% endblock %}

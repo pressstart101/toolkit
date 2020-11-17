@@ -13,7 +13,7 @@ class User(db.Model):
                        autoincrement=True,
                        )
     email = db.Column(db.String(50), nullable=False, unique=True,)
-    password = db.Column(db.String(10), nullable=False,)
+    password = db.Column(db.String(50), nullable=False,)
 
 
 def connect_to_db(app):
