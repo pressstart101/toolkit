@@ -5,6 +5,14 @@ h1 {
     color: rgb(155, 174, 197);
 }
 
+h3 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
 body { background: url(img/bg.jpg);
     height: 100vh; 
     /* background-position: center; */
@@ -18,6 +26,12 @@ body { background: url(img/bg.jpg);
     margin: auto;
     
 
+}
+
+#logout {
+    position: absolute;
+    top: 15%;
+    right: 5%;
 }
 
 .list-group {

@@ -17,7 +17,7 @@ import jinja2
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
 
-
+result = {}
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -73,13 +73,47 @@ def logout():
 @app.route('/')
 def homepage():
     """View homepage."""
-    session['user'] = "email"
+    # session['user'] = "email"
     if session.get('logged_in_as'):
         user = crud.get_user_by_id(session['logged_in_as'])
         flash(f'Welcome back, {user.email}')
+        session['user'] = user.email
     else:
         return redirect('/login')
     return render_template('homepage.html')
+
+
+@app.route('/reports')
+def reports():
+
+    return render_template("report.html")
+
+
+@app.route('/save_report')
+def save_report():
+    print(f'\n\n\n\nTHIS IS REPORT {result}\n\n\n\n\n')
+    # url = result['url']
+    # is_vulnerable = result['is_vulnerable']
+    # if result['is_vulnerable'] == False:
+    #     crud.create_report(url, is_vulnerable)
+    # else:
+    #     exploit = result['exploit']
+    #     field_name = result['field_name']
+    #     form_type = result['form_type']
+    #     method = result['method']
+
+    #     crud.create_report(url, is_vulnerable, exploit, field_name, form_type, method)
+    crud.create_report(result)        
+    return render_template('homepage.html')
+
+
+
+@app.route('/api/reports.json')
+def get_reports():
+    return "blah"
+
+
+    return jsonify(result)
 
 # @app.route('/login')
 # def login():
@@ -125,6 +159,7 @@ def xss_test():
 
     print("done\n\n\n")
     xss = XSS()
+    global result
     result = xss.scan_xss(url)
     print("result\n\n\n")
     print(result)
