@@ -56,3 +56,6 @@ def create_report(result):
     db.session.add(report)
     db.session.commit()
     return Report.query.filter_by(url=url).first()
+
+def return_all_reports():
+    return Report.query.all()

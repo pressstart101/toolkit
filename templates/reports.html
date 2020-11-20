@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Hackers Toolkit{% endblock %}
+
+{% block body %}
+
+<title>Reports</title>
+
+<h2>Reports</h2>
+
+
+
+<div class="w-50 panel panel-default justify-content-center"" id='reports'>
+    {% for report in reports %}
+    <table id="table" class="table table-dark" >
+      <tr><th>URL</th><td id="vuln_url">{{ report.url }}</td></tr>
+      <tr><th>Is Vulnerable</th><td id="is_vulnerable">{{ report.is_vulnerable }}</td></tr>
+      <tr><th>Successful Payload</th><td id="exploit">{{ report.exploit }}</td></tr>
+      <tr><th>Vulnerable Field Name Tag</th><td id="vuln_field">{{ report.field_name }}</td></tr>
+      <tr><th>Vulnerable Form Type</th><td id="vuln_form_type">{{ report.form_type }}</td></tr>
+      <tr><th>Method</th><td id="method">{{ report.method }}</td></tr>
+      {% endfor %} 
+      <!-- <tr><th>filed name</th><td id="field_name">data</td></tr> -->
+
+  </table>
+  </div>
+
+
+
+
+{% endblock %}

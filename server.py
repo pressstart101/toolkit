@@ -85,8 +85,11 @@ def homepage():
 
 @app.route('/reports')
 def reports():
-
-    return render_template("report.html")
+    print('hi\n')
+    reports = crud.return_all_reports()
+    print(reports[0].url)
+    print('after')
+    return render_template("reports.html", reports=reports)
 
 
 @app.route('/save_report')
