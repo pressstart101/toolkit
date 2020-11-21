@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash, session,redirect, jsonify, session, get_flashed_messages
-from flask import send_from_directory
+from flask import send_from_directory, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from seed_ping import kickoff_tcpdump, test_ping, PingListener
@@ -13,6 +13,10 @@ import pdb
 from config import SECRET_KEY
 import jinja2
 import flask_whooshalchemy as wa
+import csv
+import pickle
+import json
+import pandas
 
 
 
@@ -141,11 +145,55 @@ def save_report():
     crud.create_report(result)        
     return render_template('homepage.html')
 
+@app.route('/export')
+def export():
+    # with open('dump.csv', 'wb') as f:
+    #     out = csv.writer(f)
+    #     out.writerow(['id', 'url'])
+
+    #     for item in session.query(Report).all():
+    #         out.writerow([report.id, report.url])
+
+    # reports = crud.return_all_reports()
+    # pickle_out = open("outfile", "w")
+    # for report in reports:
+    #     # pickle.dump(report, pickle_out)
+    #     pickle_out.write(report)
+
+    # pickle_out = open('outfile', 'wb')
+    # pickle.dump(report, pickle_out)
+
+    # serialized = pickle.load(report)
+    # print(f'\n\n\nReport {serialized}')
+    # file = open('reports', 'w')
+    # file.write(report)
+    # file.close()
+
+
+    reports = session.get('reports', None)
+    # df = pandas.read_json(reports)
+    # result = df.to_csv()
+
+    with open('outfile', 'w') as fout:
+        json.dump(reports, fout)
+
+
+    # print(f'\n\n\n{result}\n\n\n')
+    return send_file('/home/vagrant/src/project/outfile') 
+
 
 
 @app.route('/api/reports.json')
 def get_reports():
-    return "blah"
+    result = []
+    reports = crud.return_all_reports()
+    for report in reports:
+        obj = {'url': report.url, 'is_vulnerable': report.is_vulnerable}
+        result.append(obj)
+        session['reports'] = result
+        print(session['reports'])
+
+    
 
 
     return jsonify(result)
