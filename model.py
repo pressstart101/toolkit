@@ -1,8 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
+from whoosh.analysis import StemmingAnalyzer
+import flask_sqlalchemy
+import flask_whooshalchemy
+from whoosh.analysis import StemmingAnalyzer
 
 
-db = SQLAlchemy()
-
+# db = SQLAlchemy()
+db = flask_sqlalchemy.SQLAlchemy()
+# wa.whoosh_index(app, Report)
 class User(db.Model):
     """Feline catus."""
 
@@ -27,6 +32,9 @@ class Report(db.Model):
 
 
     __tablename__ = "reports"
+    __searchable__ = ['url', 'is_vulnerable']  # these fields will be indexed by whoosh
+    __analyzer__ = StemmingAnalyzer()
+
     report_id = db.Column(db.Integer,
                        primary_key=True,
                        autoincrement=True,
@@ -38,13 +46,17 @@ class Report(db.Model):
     is_vulnerable = db.Column(db.String(50), nullable=False,)
     method = db.Column(db.String(50))
 
+# class searchForm(db.Model):
+#     report = StringField('Search course', validators=[DataRequired(), Length(max=60)])
+
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///users'
     app.config['SQLALCHEMY_ECHO'] = False
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config['WHOOSH_BASE'] = 'whoosh'
     db.app = app
     db.init_app(app)
 

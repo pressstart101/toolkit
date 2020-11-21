@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
 import codecs
+from model import Report
 
 class XSS():
 
@@ -83,6 +84,8 @@ class XSS():
 
         forms = self.get_all_forms(url)
         print(f'FORMS \n\n{forms}\n\n')
+        
+        # print(f'\n\n\n\nTHIS IS THE URL {report.url}\n\n\n')
         # print(f"[+] Detected {len(forms)} forms on {url}.")
 
         # js_script = "<Script>alert('hi')</scripT>"
@@ -93,6 +96,10 @@ class XSS():
         # print(js_script)
         # returning value
         is_vulnerable = False
+        # report = Report()
+        # report.url = url
+        # report.is_vulnerable = is_vulnerable
+
         result = {"url": url,
             "num_of_vulnerable_forms": len(forms),
             "is_vulnerable": is_vulnerable,
@@ -124,6 +131,15 @@ class XSS():
                     result['form_type'] = form_type
                     result['method'] = method
                     result['is_vulnerable'] = is_vulnerable
+
+
+                    # create report object:
+                    # report.is_vulnerable = is_vulnerable
+                    # report.field_name = field_name
+                    # report.exploit = exploit
+                    # report.form_type = form_type
+                    # report.method = method
+
                     break
                  # won't break because we want to print available vulnerable forms
         print(f'RESULT from \n\n\{result}\n\n')

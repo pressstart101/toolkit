@@ -211,6 +211,23 @@ $('#url_form').on('submit', (evt) => {
 
 
 
+
+//   $('#save_report').on('submit', (evt) => {
+//     evt.preventDefault();
+//     $('#table').hide()
+//     $('#notvuln').hide()
+//     let params = {'url_form': $('#url').val()};
+
+//     $.get('/api/xss.json', params, displayResult);
+//     $('#pageloader').show();
+
+//     // let table = $('#table').DataTable();
+//     // table.ajax.reload();
+
+//   });
+
+
+
 $(document).ready(function(){
     $("#url_form").on("submit", function(){
      $("#pageloader").fadeIn();
@@ -247,3 +264,16 @@ $(document).ready(function(){
 //     // Display response from the server
 //     alert(`${response}`);
 //   });
+
+
+
+document.getElementById("reports").onclick = function () {
+    location.href = "/reports";
+};
+
+document.getElementById("dashboard").onclick = function () {
+    location.href = "/";
+};
+
+
+

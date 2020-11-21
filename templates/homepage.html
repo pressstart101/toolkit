@@ -12,6 +12,15 @@
       <img src="static/img/loader.gif" alt="processing..." /> 
       <!-- http://www.ajaxload.info/ -->
    </div>
+
+   <button id="reports" class="float-left submit-button" >Reports</button>
+
+    <script type="text/javascript">
+        document.getElementById("reports").onclick = function () {
+            location.href = "/reports";
+        };
+    </script>
+
    <h3>Logged in as {{session['user']}}</h3>
       <form id="url_form">
         <label form="url">URL:</label>

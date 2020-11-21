@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from seed_ping import kickoff_tcpdump, test_ping, PingListener
 from model import connect_to_db, User
+from model import Report
 import crud
 import os
 import time
@@ -11,11 +12,13 @@ from xss import XSS
 import pdb 
 from config import SECRET_KEY
 import jinja2
+import flask_whooshalchemy as wa
 
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
+
 
 result = {}
 
@@ -91,6 +94,35 @@ def reports():
     print('after')
     return render_template("reports.html", reports=reports)
 
+
+@app.route('/search')
+def search():
+    query = request.args.get('query')
+    print(query)
+    print("THIS IS QUERY\n\n\n")
+    # reports = Report.query.search(query, limit=num_posts)
+    # reports = Report.query.filter_by(query, limit=num_posts)
+    if query:
+        reports = crud.search_reports(query)
+
+    print(f'\n\n\n\n\REPORTS{reports}n\n\n\n\n')
+    # reports = crud.return_all_reports()
+    # reports = Report.query.search(query, limit=num_posts).all()
+
+
+    return render_template('reports.html', reports=reports)
+    # return render_template('reports.html')
+
+
+    # searchForm = searchForm()
+    # reports = Report.query
+
+    # if searchForm.validate_on_submit():
+    #     reports = reports.filter(models.Report.url.like('%' + searchForm.report.data + '%'))
+
+    # reports = reports.order_by(Report.name).all()
+
+    return render_template('reports.html', reports = reports)
 
 @app.route('/save_report')
 def save_report():

@@ -1,5 +1,5 @@
 from model import db, User, connect_to_db, Report
-
+import flask_whooshalchemy as wa
 
 if __name__ == '__main__':
     from server import app
@@ -59,3 +59,8 @@ def create_report(result):
 
 def return_all_reports():
     return Report.query.all()
+
+def search_reports(query):
+    return Report.query.filter(Report.url == query).all()
+
+    
