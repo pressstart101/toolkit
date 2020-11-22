@@ -1,9 +1,45 @@
 {% extends 'base.html' %}
-{% block title %}Hackers Toolkit{% endblock %}
+{% block title %}Hacker Toolkit{% endblock %}
 
 {% block body %}
   <title>Dashboard</title>
-
+  <div class="container"></div>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark ">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" id='test'>
+        <li class="nav-item active">
+          <a class="nav-link" href="/reports">Reports <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</div>
 
 
     <h1>Dashboard</h1>
@@ -13,19 +49,14 @@
       <!-- http://www.ajaxload.info/ -->
    </div>
 
-   <button id="reports" class="float-left submit-button" >Reports</button>
 
-    <script type="text/javascript">
-        document.getElementById("reports").onclick = function () {
-            location.href = "/reports";
-        };
-    </script>
+
 
    <h3>Logged in as {{session['user']}}</h3>
       <form id="url_form">
         <label form="url">URL:</label>
         <input type="text" id="url" name="url"><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Scan">
         <!-- <input type="submit" value="Save Report" formaction="/reports"> -->
       </form>
       <form action='/save_report' id="save_report">

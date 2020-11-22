@@ -7,21 +7,23 @@ h1 {
 
 h3 {
     text-align: center;
+    font-weight: bold;
 }
 
 h2 {
     text-align: center;
+    font-weight: bold;
 }
 
-body { background: url(img/bg.jpg);
+/* body { background: url(img/bg.jpg);
     height: 100vh; 
-    /* background-position: center; */
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color:rgb(155, 174, 197);
     font-family: "Courier New", Courier, monospace;
     font-size: 20px;
-}
+} */
 
 
 
@@ -80,9 +82,20 @@ body { background: url(img/bg.jpg);
 
 
 
-  body,html {
-    background-image: url('https://i.imgur.com/xhiRfL6.jpg');
+  body {
+    /* background-image: url('https://i.imgur.com/xhiRfL6.jpg'); */
+    background-image: url('/static/img/map.jpg');
     height: 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 70px;
+
+
+
+    background-size: cover;
+    color:rgb(17, 201, 17);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
 }
 
 #profile-img {
@@ -94,8 +107,27 @@ body { background: url(img/bg.jpg);
 
 
 
+#reports {
+    opacity: 0.9;
+    margin: auto;
 
+}
 
+.table {
+    color:rgb(17, 201, 17);
+
+    border-radius: 25px;
+}
+
+.navbar{
+    color: green;
+    
+}
+
+.nav-link{
+    color: green !important;
+    font-weight: bold;
+}
 
 /* NAVBAR */
 

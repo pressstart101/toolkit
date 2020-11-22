@@ -12,11 +12,7 @@ from xss import XSS
 import pdb 
 from config import SECRET_KEY
 import jinja2
-import flask_whooshalchemy as wa
-import csv
-import pickle
 import json
-import pandas
 
 
 
@@ -179,7 +175,7 @@ def export():
 
 
     # print(f'\n\n\n{result}\n\n\n')
-    return send_file('/home/vagrant/src/project/outfile') 
+    return send_file('/home/vagrant/src/project/outfile',  attachment_filename="reports.json") 
 
 
 
@@ -188,7 +184,7 @@ def get_reports():
     result = []
     reports = crud.return_all_reports()
     for report in reports:
-        obj = {'url': report.url, 'is_vulnerable': report.is_vulnerable}
+        obj = {'url': report.url, 'is_vulnerable': report.is_vulnerable, 'successful_payload': report.exploit, 'vulnerable_filed_name_tag': report.field_name, 'vulnerable_form_type': report.form_type, 'method': report.method}
         result.append(obj)
         session['reports'] = result
         print(session['reports'])
