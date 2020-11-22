@@ -121,12 +121,30 @@ h2 {
 
 .navbar{
     color: green;
+    opacity: 0.9;
     
 }
 
 .nav-link{
     color: green !important;
     font-weight: bold;
+}
+
+
+#contact {
+    display: inline-block;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.9;
+
+    line-height:20px;
+}
+#footer-reports {
+    opacity: 0.9;
 }
 
 /* NAVBAR */
