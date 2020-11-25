@@ -7,7 +7,7 @@
 <div class="container"></div>
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark ">
     
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#"><img src="/static/img/mask.png" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,11 +17,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
         </li>
-        <form action='/logout'>
-        <li class="nav-item active">
-            <a class="nav-link" >Logout <span class="sr-only">(current)</span></a>
-          </li>
-          </form>
+
 
 
         <!-- <li class="nav-item">
@@ -41,15 +37,20 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li> -->
+        <form class="form-inline my-2 my-lg-0" method="GET" action="search">
+            <div class="form-group " >
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="query" id='query' required>
+            </div>
+            <button class="btn btn-outline-success my-2 my-sm-0 btm btm-primary" type="submit">Search</button>
+          </form>
       </ul>
 
-      <!-- #search -->
-      <form class="form-inline my-2 my-lg-0" method="GET" action="search">
-        <div class="form-group">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="query" id='query' required>
-        </div>
-        <button class="btn btn-outline-success my-2 my-sm-0 btm btm-primary" type="submit">Search</button>
-      </form>
+      <form class=ml-auto id="logout" action='/logout'>
+        <li class="nav-item active ">
+             <button class="btn nav-link " type="submit" id='logout'>Logout</button>
+        </li>
+        </form>
+
 
 
     </div>

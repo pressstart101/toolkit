@@ -40,6 +40,8 @@ h2 {
     position: absolute;
     top: 15%;
     right: 5%;
+    font-size: 20px;
+    margin-left: auto !important
 }
 
 .list-group {
