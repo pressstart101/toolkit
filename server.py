@@ -143,6 +143,8 @@ def save_report():
 
 @app.route('/export')
 def export():
+
+    print('got here')
     # with open('dump.csv', 'wb') as f:
     #     out = csv.writer(f)
     #     out.writerow(['id', 'url'])
@@ -173,9 +175,9 @@ def export():
     with open('outfile', 'w') as fout:
         json.dump(reports, fout)
 
-
+    return jsonify(reports)
     # print(f'\n\n\n{result}\n\n\n')
-    return send_file('/home/vagrant/src/project/outfile',  attachment_filename="reports.json") 
+    # return send_file('/home/vagrant/src/project/outfile',  attachment_filename="reports.json") 
 
 
 
