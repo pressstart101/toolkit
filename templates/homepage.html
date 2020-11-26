@@ -5,7 +5,7 @@
   <title>Dashboard</title>
   <div class="container"></div>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-dark ">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#"><img src="/static/img/mask.png" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,16 +13,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/reports">Reports <span class="sr-only">(current)</span></a>
+          <a class="nav-link border border-secondary rounded" id='navigation' href="/reports">Reports <span class="sr-only">(current)</span></a>
         </li>
 
-        <form class=ml-auto id="logout" action='/logout'>
-          <li class="nav-item active ">
-               <button class="btn nav-link " type="submit" id='logout'>Logout</button>
-          </li>
-          </form>
-        
+          <li class="nav-item active">
+              <a class="nav-link " >Logged in as {{session['user']}} <span class="sr-only">(current)</span></a>
+            </li>
+
+  
+        <form action='/logout'>
+          <li class="nav-item active">
+              <button class="nav-link border border-secondary rounded btn  btm btm-primary" >Logout <span class="sr-only">(current)</span></button>
+            </li>
+            </form>
+
       </ul>
+
 
     </div>
   </nav>
@@ -43,22 +49,29 @@
 
 
 
-   <h3>Logged in as {{session['user']}}</h3>
+  
       <form id="url_form">
-        <label form="url">URL:</label>
-        <input type="text" id="url" name="url"><br><br>
-        <input type="submit" value="Scan">
+        <label form="url">Enter URL to scan for XSS:</label>
+        <input type="text" id="url" name="url" placeholder="URL to scan for XSS"><br><br>
+        <input class="btn btn-outline-success my-4 my-sm-0 btm btm-primary" type="submit" value="Scan">
         <!-- <input type="submit" value="Save Report" formaction="/reports"> -->
+
+        <form action='/save_report' id="save_report">
+          <input class="btn btn-outline-success my-4 my-sm-0 btm btm-primary" type="submit" value="Save Report">
+        </form>
+
       </form>
-      <form action='/save_report' id="save_report">
-        <input type="submit" value="Save Report">
-      </form>
+
+
+
 
       <!-- <form id="xss">
         URL: <input type="text" name="url">
       </form> -->
     
 
+
+      
 
 
     <!-- <div>
@@ -88,8 +101,11 @@
   </table>
   </div>
 
-  <div id="notvuln" style="display:none">
-    <h3>Not Vulnerable to XSS</h3>
+  <div class=" w-25 table table-dark panel panel-default justify-content-center text-center" id="notvuln" style="display:none">
+    <table id="table" >
+      <tr><th>Not Vulnerable to Cross Site Scripting</th></tr>
+  
+  </table>
   </div>
 
 
@@ -98,8 +114,8 @@
 
   <!-- </div> -->
 
-  <div class="w-25 panel panel-default justify-content-center float-right"" id='ping'>
-    <table id="table table-curved" class="table table-dark">
+  <div class="align-baseline w-20 panel panel-default justify-content-center float-right " id='ping'>
+    <table id=" table table-curved ping_table" class="table table-dark">
       <thead>
       <tr>
           <th scope="col">Time</th>
@@ -110,6 +126,7 @@
     </tbody>
   </table>
   </div>
+</span>
 
 
 

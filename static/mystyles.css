@@ -1,18 +1,20 @@
 h1 {
     text-align: center;
-    font-size: 100px;
+    font-size: 80px;
     font-weight: bold;
-    color: rgb(155, 174, 197);
+    color: rgb(14, 124, 14);
 }
 
 h3 {
     text-align: center;
-    font-weight: bold;
+
+    font-size: 4vh;
 }
 
 h2 {
     text-align: center;
     font-weight: bold;
+    font-size: 55px;
 }
 
 /* body { background: url(img/bg.jpg);
@@ -130,11 +132,22 @@ h2 {
 .nav-link{
     color: green !important;
     font-weight: bold;
+    font-size: 3vh;
+}
+
+#navigation {
+    margin-right: 15vh;
+}
+
+#loggedinas {
+    font-style: italic;
+    margin-right: 5vh;
 }
 
 
 #contact {
     display: inline-block;
+    font-style: normal;
 }
 
 #footer {
@@ -149,7 +162,63 @@ h2 {
     opacity: 0.9;
 }
 
-/* NAVBAR */
+
+#export_button {
+    margin: auto !important;
+    font-weight: bold;
+    width: 200px;
+    font-size: 20px;
+    
+}
+
+#export {
+    width: 12%;
+    margin: auto !important;
+    padding-bottom: 1%;
+    
+    
+  }
+
+  #xss {
+      opacity: 0.9;
+      margin: auto;
+  }
 
 
+  #ping {
+    opacity: 0.9;
+    position: fixed;
+    top: 15vh;
+    right: 5vh;
 
+}
+
+
+#url_form {
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 80px;
+    
+}
+
+#url {
+  background-color: #ced4da; 
+  border-radius: 10px; 
+}
+
+#notvuln {
+    opacity: 0.9;
+    margin: auto;
+    text-align: center;
+}
+
+#enter {
+    background-color: rgb(4,93,136);
+    border-color: green;
+}
+
+
+#register {
+    background-color: rgb(4,93,136);
+    border-color: green;
+}

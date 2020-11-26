@@ -15,9 +15,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" >
         <li class="nav-item active">
-          <a class="nav-link" href="/">Dashboard <span class="sr-only">(current)</span></a>
+          <a class="nav-link border border-secondary rounded" id='navigation' href="/">Dashboard <span class="sr-only">(current)</span></a>
         </li>
 
+        
+        <li class="nav-item active">
+            <a class="nav-link " >Logged in as {{session['user']}} <span class="sr-only">(current)</span></a>
+          </li>
+
+
+      <form action='/logout'>
+        <li class="nav-item active">
+            <button class="nav-link border border-secondary rounded btn  btm btm-primary" >Logout <span class="sr-only">(current)</span></button>
+          </li>
+          </form>
 
 
         <!-- <li class="nav-item">
@@ -37,20 +48,15 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li> -->
-        <form class="form-inline my-2 my-lg-0" method="GET" action="search">
-            <div class="form-group " >
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="query" id='query' required>
-            </div>
-            <button class="btn btn-outline-success my-2 my-sm-0 btm btm-primary" type="submit">Search</button>
-          </form>
       </ul>
 
-      <form class=ml-auto id="logout" action='/logout'>
-        <li class="nav-item active ">
-             <button class="btn nav-link " type="submit" id='logout'>Logout</button>
-        </li>
-        </form>
-
+      <!-- #search -->
+      <form class="form-inline my-2 my-lg-0 " method="GET" action="search">
+        <div class="form-group " >
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="query" id='query' required>
+        </div>
+        <button class="btn btn-outline-success my-2 my-sm-0 btm btm-primary" type="submit">Search</button>
+      </form>
 
 
     </div>
@@ -59,8 +65,8 @@
 </div>
 <h2>Reports</h2>
 
-<div id="export">
-    <a href = '/export' download="reports.json"><button class="btn btn-outline-success my-2 my-sm-0 btm btm-primary">export to json</button></a>
+<div class="row well row-centered" id="export">
+    <a href = '/export' download="reports.json"><button class="btn btn-outline-success my-4 my-sm-0 btm btm-primary"id="export_button">export to json</button></a>
     
 </div>
 
