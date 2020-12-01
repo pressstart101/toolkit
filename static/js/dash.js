@@ -1,3 +1,24 @@
+
+
+
+let currentPrice = new XMLHttpRequest();
+setInterval(function(){ 
+
+
+    currentPrice.open('GET', 'https://api.gdax.com/products/BTC-USD/book', true);
+    currentPrice.onreadystatechange = function(){
+      if(currentPrice.readyState == 4){
+        let ticker = JSON.parse(currentPrice.responseText);
+        let price = ticker.bids[0][0];
+        document.getElementById('btc').innerHTML = "₿: $" + price;
+      };
+    };
+    currentPrice.send();
+
+
+ }, 2000);
+
+
 let arr = [];
 window.setInterval(function(){
     
@@ -196,10 +217,25 @@ function displayResult(data) {
 
 
 $('#url_form').on('submit', (evt) => {
+    let scan = document.getElementById('scan')
+    let save = document.getElementById('save_report')
+    let target = evt.target;
+    let val = $("input[type=submit][clicked=true]").innerHTML;
+    
+    console.log(val);
+    
+
     evt.preventDefault();
     $('#table').hide()
     $('#notvuln').hide()
     let params = {'url_form': $('#url').val()};
+    if ($(document.activeElement).text() === "Scan") {
+        $.get('/api/xss.json', params, displayResult);
+        $('#pageloader').show();
+    } else {
+        console.log('went to else')
+        $.get('/save_report')
+    }
 
     $.get('/api/xss.json', params, displayResult);
     $('#pageloader').show();
@@ -210,6 +246,9 @@ $('#url_form').on('submit', (evt) => {
   });
 
 
+
+
+// event.target
 
 
 //   $('#save_report').on('submit', (evt) => {
@@ -228,11 +267,11 @@ $('#url_form').on('submit', (evt) => {
 
 
 
-$(document).ready(function(){
-    $("#url_form").on("submit", function(){
-     $("#pageloader").fadeIn();
-    });//submit
-});//document ready
+// $(document).ready(function(){
+//     $("#url_form").on("submit", function(){
+//      $("#pageloader").fadeIn();
+//     });//submit
+// });//document ready
 
 
 
@@ -267,12 +306,45 @@ $(document).ready(function(){
 
 
 
-document.getElementById("reports").onclick = function () {
-    location.href = "/reports";
-};
+// document.getElementById("reports").onclick = function () {
+//     location.href = "/reports";
+// };
 
-document.getElementById("dashboard").onclick = function () {
-    location.href = "/";
-};
+// document.getElementById("dashboard").onclick = function () {
+//     location.href = "/";
+// };
 
+
+
+
+
+function urlcodec() {
+    console.log("launched urlcodec")
+    let choice = document.getElementById('choice').value;
+    if (choice === "encode") {
+        
+        let text = document.getElementById('urlcodec_textarea').value;
+        let encoded = encodeURI(text)
+        document.getElementById('urlcode_output').value = encoded
+
+    } else {
+        let text = document.getElementById('urlcodec_textarea').value;
+        let encoded = decodeURI(text)
+        document.getElementById('urlcode_output').value = encoded
+
+    }
+}
+
+
+
+// document.getElementById("encode").onsubmit = function () {
+//     if choice == "encode" 
+//     encodeURI(data)
+    
+// };
+
+// document.getElementById("decode").onclick = function () {
+//     $.get('/urlcode');
+//     decodeURI(data)
+// };
 

@@ -30,7 +30,11 @@
       </ul>
 
 
+    
+       
+
     </div>
+    <div id="btc"></div>
   </nav>
 </div>
 
@@ -53,13 +57,10 @@
       <form id="url_form">
         <label form="url">Enter URL to scan for XSS:</label>
         <input type="text" id="url" name="url" placeholder="URL to scan for XSS"><br><br>
-        <input class="btn btn-outline-success my-4 my-sm-0 btm btm-primary" type="submit" value="Scan">
+        <button class="btn btn-outline-success my-4 my-sm-0 btm btm-primary" type="submit" id="scan">Scan</button>
+        <button class="btn btn-outline-success my-4 my-sm-0 btm btm-primary"id="save_report"  type="submit" formaction="/save_report">Save Report</button>
+
         <!-- <input type="submit" value="Save Report" formaction="/reports"> -->
-
-        <form action='/save_report' id="save_report">
-          <input class="btn btn-outline-success my-4 my-sm-0 btm btm-primary" type="submit" value="Save Report">
-        </form>
-
       </form>
 
 
@@ -129,6 +130,20 @@
 </span>
 
 
+<div class="align-baseline w-20 panel panel-default justify-content-center float-left " id='urlcode'>
+<form onsubmit="return false">
+<label>URL Encode and Decode:</label>
+
+<select name="urlcode" id="choice">
+  <option value="encode">Encode URL</option>
+  <option value="decode">Decode URL</option>
+</select>
+
+<textarea placeholder="Type or paste here.." name="urlcodec_textarea" id="urlcodec_textarea"></textarea>
+<button onclick="urlcodec()" class="btn btn-outline-success my-4 my-sm-0 btm btm-primary" id="urlcode_button" >Submit</button>
+<textarea name="urlcode_output" id="urlcode_output"></textarea>
+</form>
+</div>
 
 
   <div id='root'>

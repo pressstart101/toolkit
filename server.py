@@ -13,6 +13,7 @@ import pdb
 from config import SECRET_KEY
 import jinja2
 import json
+import urllib.parse
 
 
 
@@ -38,7 +39,7 @@ def login():
         elif user.password == password:
             session['logged_in_as'] = user.user_id
 
-            flash("Logged in!")
+            # flash("Logged in!")
             return redirect('/')
 
         else:
@@ -79,7 +80,7 @@ def homepage():
     # session['user'] = "email"
     if session.get('logged_in_as'):
         user = crud.get_user_by_id(session['logged_in_as'])
-        flash(f'Welcome back, {user.email}')
+        # flash(f'Welcome back, {user.email}')
         session['user'] = user.email
     else:
         return redirect('/login')
@@ -127,6 +128,7 @@ def search():
 @app.route('/save_report')
 def save_report():
     print(f'\n\n\n\nTHIS IS REPORT {result}\n\n\n\n\n')
+    print(f'\n\n\n\nFROM SAVE_REPORT \n\n\n')
     # url = result['url']
     # is_vulnerable = result['is_vulnerable']
     # if result['is_vulnerable'] == False:
@@ -138,7 +140,10 @@ def save_report():
     #     method = result['method']
 
     #     crud.create_report(url, is_vulnerable, exploit, field_name, form_type, method)
-    crud.create_report(result)        
+    if crud.create_report(result):
+        flash('report saved!')  
+    else:
+        flash("couldn't save the report")     
     return render_template('homepage.html')
 
 @app.route('/export')
@@ -253,6 +258,15 @@ def xss_test():
 #     return send_from_directory(os.path.join(app.root_path, 'static/img'),
 #                           'favicon.ico')
 
+
+@app.route('/urlcode')
+def encode(encodedStr):
+    return urllib.parse.quote_plus(encodedStr)
+
+def decode(encodedStr):
+    return urllib.parse.unquote(encodedStr)
+
+    
 
 @app.route('/users', methods=['POST']) 
 def register_user():
