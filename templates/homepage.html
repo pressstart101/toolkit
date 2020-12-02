@@ -44,7 +44,28 @@
 
 
     <h1>Dashboard</h1>
-
+    <div id="flash_msg" hidden>
+      <p>report saved!</p>
+      <!-- {% with messages = get_flashed_messages() %} 
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{message}}</p>
+        {% endfor %}
+      {% endif %}
+      
+      {% endwith %} -->
+    </div>
+    <div id="scanning" hidden>
+      <p>scanning...</p>
+      <!-- {% with messages = get_flashed_messages() %} 
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{message}}</p>
+        {% endfor %}
+      {% endif %}
+      
+      {% endwith %} -->
+    </div>
     <div id="pageloader" hidden>
       <img src="static/img/loader.gif" alt="processing..." /> 
       <!-- http://www.ajaxload.info/ -->
@@ -52,8 +73,6 @@
 
 
 
-
-  
       <form id="url_form">
         <label form="url">Enter URL to scan for XSS:</label>
         <input type="text" id="url" name="url" placeholder="URL to scan for XSS"><br><br>
@@ -62,7 +81,6 @@
 
         <!-- <input type="submit" value="Save Report" formaction="/reports"> -->
       </form>
-
 
 
 

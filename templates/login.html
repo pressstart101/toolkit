@@ -2,10 +2,21 @@
 {% block title %}Hackers Toolkit{% endblock %}
 
 {% block body %}
-<div class="container h-80">
+<div id="flash_msg_login">
+  {% with messages = get_flashed_messages() %} 
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{message}}</p>
+      {% endfor %}
+    {% endif %}
+
+  {% endwith %}
+</div>
+<div class="container h-80" >
     <div class="row align-items-center h-100">
         <div class="col-3 mx-auto">
-            <div class="text-center">
+            <div class="text-center" id="creds">
+
                 <img id="profile-img" class="rounded-circle profile-img-card" src="https://i.imgur.com/6b6psnA.png" />
                 <p id="profile-name" class="profile-name-card"></p>
                 <form  class="form-signin" action="/login" method="POST">
@@ -19,9 +30,13 @@
 
                 </form><!-- /form -->
                 <ul>
-                    {% for message in get_flashed_messages() %}
+                    <!-- {% for message in get_flashed_messages() %} 
                       <li>{{ message }}</li>
-                    {% endfor %}
+                    {% endfor %} -->
+
+
+
+
                   </ul>
                   
             </div>
