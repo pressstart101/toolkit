@@ -199,12 +199,13 @@ h2 {
     vertical-align: middle;
     margin-bottom: 30px;
     margin-top: 40px;
-    
+    vertical-align:top !important;
 }
 
 #url {
   background-color: #ced4da; 
   border-radius: 10px; 
+  margin-bottom: 0 !important;
 }
 
 #notvuln {
@@ -277,6 +278,7 @@ select:checked  {
 }
 
 
+
 #wrapper {
     font-size: 1em;
     font-family: "Courier New", Courier, monospace;
@@ -299,3 +301,37 @@ select:checked  {
       font-weight: bold;
   }
   
+#flash_msg {
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: -17px;
+    margin-top: -20px; 
+    vertical-align:top;
+}
+
+#flash_msg_login {
+    text-align: center;
+    margin-top: -47px; 
+}
+
+
+
+#scanning {
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: -17px;
+    margin-top: -20px; 
+    vertical-align:top;
+}
+
+
+#creds{
+    z-index: 950;
+    vertical-align:top;
+    margin-top: -70px;
+}
+
+/* #save_report {
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+} */

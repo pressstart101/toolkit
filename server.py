@@ -33,7 +33,7 @@ def login():
         password = request.form.get('password')
         user = crud.get_user_by_email(email)
         if user == None:
-            flash("Doesnt exist!")
+            flash("User doesnt exist")
             return redirect('/login')    
 
         elif user.password == password:
@@ -51,10 +51,14 @@ def login():
 
 @app.route('/logout')
 def logout():
+    if "logged_in_as" in session:
+        user = session['logged_in_as']
+        flash('you have been logged out', 'info')
     session.pop('logged_in_as', 'none')
+    
     return redirect('/login')
 
-
+# position absolute
 
     """Log user into application."""
     # if request.method == 'POST':
@@ -145,6 +149,15 @@ def save_report():
     else:
         flash("couldn't save the report")     
     return render_template('homepage.html')
+
+# @app.route('/flash_for_save_report')
+# def flash_msg():
+#     flash('report successfully saved')
+
+# @app.route('/flash_for_scanning')
+# def flash_msg():
+#     flash('scanning...')
+    
 
 @app.route('/export')
 def export():
@@ -237,12 +250,13 @@ def ping():
 
 @app.route('/api/xss.json')
 def xss_test():
+    # flash("scanning...")
     xss = XSS()
     # url = "https://xss-game.appspot.com/level1/frame"
     url = request.args["url_form"]
     print("this is url \n\n\n")
     print(url)
-
+    
     print("done\n\n\n")
     xss = XSS()
     global result
@@ -266,7 +280,7 @@ def encode(encodedStr):
 def decode(encodedStr):
     return urllib.parse.unquote(encodedStr)
 
-    
+
 
 @app.route('/users', methods=['POST']) 
 def register_user():

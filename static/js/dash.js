@@ -232,6 +232,7 @@ $('#url_form').on('submit', (evt) => {
     if ($(document.activeElement).text() === "Scan") {
         $.get('/api/xss.json', params, displayResult);
         $('#pageloader').show();
+
     } else {
         console.log('went to else')
         $.get('/save_report')
@@ -348,3 +349,17 @@ function urlcodec() {
 //     decodeURI(data)
 // };
 
+$('#flash_msg_login').hide().delay(8).fadeIn(800).delay(2000).fadeOut(800)
+
+
+document.getElementById("save_report").onclick = function () {
+    $('#flash_msg').removeAttr("hidden")
+    setTimeout(() =>$('#flash_msg').attr("hidden", true), 1500)
+}
+
+
+document.getElementById("scan").onclick = function () {
+    console.log("getting called")
+    $('#scanning').removeAttr("hidden")
+    setTimeout(() =>$('#scanning').attr("hidden", true), 1500)
+}
