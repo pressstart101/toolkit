@@ -80,28 +80,6 @@ window.setInterval(function(){
 }, 1000);
 
 
-// const formValues = $('#xss').serialize();
-// $.post("/api/xss.json", formValues, resultHandler);
-
-// $("#url_form").submit(function(e) {
-
-//     e.preventDefault(); // avoid to execute the actual submit of the form.
-
-//     var form = $(this);
-//     var url = form.attr('action');
-    
-//     $.ajax({
-//            type: "POST",
-//            url: '/api/xss.json',
-//            data: form.serialize(), // serializes the form's elements.
-//            success: function(data)
-//            {
-//                alert(data); // show response from the php script.
-//            }
-//          });
-
-    
-// });
 
 
 function displayResult(data) {
@@ -245,76 +223,6 @@ $('#url_form').on('submit', (evt) => {
     // table.ajax.reload();
 
   });
-
-
-
-
-// event.target
-
-
-//   $('#save_report').on('submit', (evt) => {
-//     evt.preventDefault();
-//     $('#table').hide()
-//     $('#notvuln').hide()
-//     let params = {'url_form': $('#url').val()};
-
-//     $.get('/api/xss.json', params, displayResult);
-//     $('#pageloader').show();
-
-//     // let table = $('#table').DataTable();
-//     // table.ajax.reload();
-
-//   });
-
-
-
-// $(document).ready(function(){
-//     $("#url_form").on("submit", function(){
-//      $("#pageloader").fadeIn();
-//     });//submit
-// });//document ready
-
-
-
-
-//   $('#xss').submit(function(e){
-//     e.preventDefault();
-//     $.ajax({
-//         url:'/api/xss.json',
-//         type:'post',
-//         data:$('#xss').serialize(),
-//         success:function(){
-//             //whatever you wanna do after the form is successfully submitted
-//             alert(data)
-//         }
-//     });
-// });
-
-//   $.get('/api/xss.json', (response) => {
-//     // Display response from the server
-//     $('#url_form').text(response.toString());
-//     // alert(`${response}`);
-//   });
-
-// $.get('/api/ping.json', (response) => {
-//     $('#ping').text(response.toString());
-//   });
-
-//   $.get('/api/ping.json', (response) => {
-//     // Display response from the server
-//     alert(`${response}`);
-//   });
-
-
-
-// document.getElementById("reports").onclick = function () {
-//     location.href = "/reports";
-// };
-
-// document.getElementById("dashboard").onclick = function () {
-//     location.href = "/";
-// };
-
 
 
 
