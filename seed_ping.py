@@ -106,6 +106,8 @@ class PingListener():
 def kickoff_tcpdump():
 
     process = subprocess.Popen(["tcpdump", "-l", "-nni", "lo", "-e", "icmp[icmptype]==8"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    process = subprocess.Popen(["tcpdump", "-l", "-nni", "eth0", "-e", "icmp[icmptype]==8"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
     flags = fcntl(process.stdout, F_GETFL) # get current p.stdout flags
     # print(flags)
     fcntl(process.stdout, F_SETFL, flags | O_NONBLOCK)
